@@ -36,12 +36,19 @@ void SceneWidget::initializeGL()
 
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
+    // Enable face culling
+    glEnable(GL_CULL_FACE);
+    glFrontFace(GL_CW);
+    glCullFace(GL_BACK);
+
     initProgram();
     initData();
 }
 
 void SceneWidget::initProgram()
 {
+    std::cout << "hello" << std::endl;
+
     m_qprogram = new QOpenGLShaderProgram(this);
     m_qprogram->addShaderFromSourceFile(QOpenGLShader::Vertex, "vertex.glsl");
     m_qprogram->addShaderFromSourceFile(QOpenGLShader::Fragment, "fragment.glsl");
@@ -54,15 +61,69 @@ void SceneWidget::initData()
     // Data
     GLfloat data[] =
     {
-        -0.5f, -0.5f, +0.0f,
-        +0.5f, -0.5f, +0.0f,
-        +0.0f, +0.5f, +0.0f,
+        // Front face
+        -1.0f, -1.0f, +1.0f,
+        -1.0f, +1.0f, +1.0f,
+        +1.0f, +1.0f, +1.0f,
+        +1.0f, -1.0f, +1.0f,
+
+        // Right face
+        +1.0f, -1.0f, +1.0f,
+        +1.0f, +1.0f, +1.0f,
+        +1.0f, +1.0f, -1.0f,
+        +1.0f, -1.0f, -1.0f,
+
+        // Top face
+        -1.0f, +1.0f, +1.0f,
+        -1.0f, +1.0f, -1.0f,
+        +1.0f, +1.0f, -1.0f,
+        +1.0f, +1.0f, +1.0f,
+
+        // Back face
+        -1.0f, -1.0f, -1.0f,
+        -1.0f, +1.0f, -1.0f,
+        +1.0f, +1.0f, -1.0f,
+        +1.0f, -1.0f, -1.0f,
+
+        // Left face
+        -1.0f, -1.0f, +1.0f,
+        -1.0f, +1.0f, +1.0f,
+        -1.0f, +1.0f, -1.0f,
+        -1.0f, -1.0f, -1.0f,
+
+        // Bottom face
+        -1.0f, -1.0f, +1.0f,
+        -1.0f, -1.0f, -1.0f,
+        +1.0f, -1.0f, -1.0f,
+        +1.0f, -1.0f, +1.0f,
     };
 
     // Indices
     GLushort indices[] =
     {
-        0, 1, 2
+        // Front face
+        0, 1, 2,
+        0, 2, 3,
+
+        // Right face
+        4, 5, 6,
+        4, 6, 7,
+
+        // Top face
+        8, 9, 10,
+        8, 10, 11,
+
+        // Back face
+        12, 14, 13,
+        12, 15, 14,
+
+        // Left face
+        16, 18, 17,
+        16, 19, 18,
+
+        // Bottom face
+        20, 22, 21,
+        20, 23, 22,
     };
 
     // Create and bind vao
@@ -97,7 +158,7 @@ void SceneWidget::paintGL()
     glUseProgram(m_program);
     glBindVertexArray(m_vao);
 
-    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, reinterpret_cast<void*>(0));
+    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, reinterpret_cast<void*>(0));
 
     glBindVertexArray(0);
     glUseProgram(0);
@@ -107,4 +168,18 @@ void SceneWidget::resizeGL(int w, int h)
 {
     // Adjust viewport
     glViewport(0, 0, w, h);
+
+    // Set mvp matrix
+    const float aspect = static_cast<float>(w) / h;
+    m_mvpMatrix.setToIdentity();
+
+    m_mvpMatrix.perspective(90.0f, aspect, 1.0f, 30.0f); // projection
+    m_mvpMatrix.lookAt(QVector3D(0, 0, 10), QVector3D(0, 0, 0), QVector3D(0, 1, 0)); // view
+    m_mvpMatrix.translate(QVector3D(-10, 0, 0));
+
+    // Load uniforms
+    glUseProgram(m_program);
+    m_mvpMatrixUnif = glGetUniformLocation(m_program, "mvpMatrix");
+    m_qprogram->setUniformValue("mvpMatrix", m_mvpMatrix);
+    glUseProgram(0);
 }

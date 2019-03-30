@@ -29,6 +29,9 @@ private:
     GLuint m_vao;
     GLuint m_positionVbo;
     GLuint m_indicesVbo;
+    GLint m_mvpMatrixUnif;
+
+    QMatrix4x4 m_mvpMatrix;
 };
 
 #endif // SCENEWIDGET_H
