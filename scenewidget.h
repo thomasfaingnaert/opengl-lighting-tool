@@ -36,7 +36,8 @@ private:
     int m_height;
     float m_angle = 0.0f;
 
-    QMatrix4x4 m_mvpMatrix;
+    QMatrix4x4 m_mvMatrix;
+    QMatrix4x4 m_pMatrix;
 
     constexpr static unsigned int numOfVertices = 24;
 };

@@ -5,10 +5,11 @@ layout(location = 1) in vec3 color;
 
 smooth out vec3 outColor;
 
-uniform mat4 mvpMatrix;
+uniform mat4 mvMatrix;
+uniform mat4 pMatrix;
 
 void main()
 {
-    gl_Position = mvpMatrix * vec4(position, 1.0f);
+    gl_Position = pMatrix * mvMatrix * vec4(position, 1.0f);
     outColor = color;
 }

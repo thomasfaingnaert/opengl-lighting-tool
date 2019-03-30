@@ -231,16 +231,18 @@ void SceneWidget::recalcMvpMatrix()
 {
     // Set mvp matrix
     const float aspect = static_cast<float>(m_width) / m_height;
-    m_mvpMatrix.setToIdentity();
 
-    m_mvpMatrix.perspective(90.0f, aspect, 1.0f, 30.0f); // projection
-    m_mvpMatrix.lookAt(QVector3D(3, 3, 3), QVector3D(0, 0, 0), QVector3D(0, 1, 0)); // view
-    //m_mvpMatrix.translate(QVector3D(-10, 0, 0));
-    m_mvpMatrix.rotate(m_angle, QVector3D(1, 0, 0));
+    m_mvMatrix.setToIdentity();
+    m_mvMatrix.lookAt(QVector3D(3, 3, 3), QVector3D(0, 0, 0), QVector3D(0, 1, 0)); // view
+    m_mvMatrix.rotate(m_angle, QVector3D(1, 0, 0)); // model
+
+    m_pMatrix.setToIdentity();
+    m_pMatrix.perspective(90.0f, aspect, 1.0f, 30.0f); // projection
 
     // Load uniforms
     glUseProgram(m_program);
-    m_qprogram->setUniformValue("mvpMatrix", m_mvpMatrix);
+    m_qprogram->setUniformValue("mvMatrix", m_mvMatrix);
+    m_qprogram->setUniformValue("pMatrix", m_pMatrix);
     glUseProgram(0);
 }
 
