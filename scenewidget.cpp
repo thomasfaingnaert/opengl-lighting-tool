@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 
 #include "scenewidget.h"
 
@@ -26,7 +27,8 @@ SceneWidget::~SceneWidget()
 void SceneWidget::initializeGL()
 {
     // Init opengl
-    initializeOpenGLFunctions();
+    if(!initializeOpenGLFunctions())
+        throw std::runtime_error("Could not load OpenGL functions.\nDo you have OpenGL v3.2?");
 
     // Print version info
     std::clog << "OpenGL version: " << glGetString(GL_VERSION) <<
