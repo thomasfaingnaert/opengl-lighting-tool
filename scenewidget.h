@@ -23,6 +23,8 @@ protected:
 private:
     void initProgram();
     void initData();
+    void recalcMvpMatrix();
+
     QOpenGLShaderProgram *m_qprogram;
 
     GLuint m_program;
@@ -30,6 +32,10 @@ private:
     GLuint m_vertexDataVbo;
     GLuint m_indicesVbo;
     GLint m_mvpMatrixUnif;
+
+    int m_width;
+    int m_height;
+    float m_angle = 0.0f;
 
     QMatrix4x4 m_mvpMatrix;
 

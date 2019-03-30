@@ -35,11 +35,18 @@ void SceneWidget::initializeGL()
                  "\nVendor: " << glGetString(GL_VENDOR) << '\n' << std::endl;
 
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClearDepth(1.0);
 
     // Enable face culling
     glEnable(GL_CULL_FACE);
     glFrontFace(GL_CW);
     glCullFace(GL_BACK);
+
+    // Enable depth test
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
+    glDepthMask(GL_TRUE);
+    glDepthRange(0.0, 1.0);
 
     initProgram();
     initData();
@@ -47,8 +54,6 @@ void SceneWidget::initializeGL()
 
 void SceneWidget::initProgram()
 {
-    std::cout << "hello" << std::endl;
-
     m_qprogram = new QOpenGLShaderProgram(this);
     m_qprogram->addShaderFromSourceFile(QOpenGLShader::Vertex, "vertex.glsl");
     m_qprogram->addShaderFromSourceFile(QOpenGLShader::Fragment, "fragment.glsl");
@@ -209,6 +214,32 @@ void SceneWidget::paintGL()
 
     glBindVertexArray(0);
     glUseProgram(0);
+
+    m_angle = m_angle + 0.75f;
+    while (m_angle > 360.0f) m_angle -= 360.0f;
+
+    recalcMvpMatrix();
+
+    // Schedule another repaint event
+    update();
+}
+
+void SceneWidget::recalcMvpMatrix()
+{
+    // Set mvp matrix
+    const float aspect = static_cast<float>(m_width) / m_height;
+    m_mvpMatrix.setToIdentity();
+
+    m_mvpMatrix.perspective(90.0f, aspect, 1.0f, 30.0f); // projection
+    m_mvpMatrix.lookAt(QVector3D(3, 3, 3), QVector3D(0, 0, 0), QVector3D(0, 1, 0)); // view
+    //m_mvpMatrix.translate(QVector3D(-10, 0, 0));
+    m_mvpMatrix.rotate(m_angle, QVector3D(1, 0, 0));
+
+    // Load uniforms
+    glUseProgram(m_program);
+    m_mvpMatrixUnif = glGetUniformLocation(m_program, "mvpMatrix");
+    m_qprogram->setUniformValue("mvpMatrix", m_mvpMatrix);
+    glUseProgram(0);
 }
 
 void SceneWidget::resizeGL(int w, int h)
@@ -216,17 +247,8 @@ void SceneWidget::resizeGL(int w, int h)
     // Adjust viewport
     glViewport(0, 0, w, h);
 
-    // Set mvp matrix
-    const float aspect = static_cast<float>(w) / h;
-    m_mvpMatrix.setToIdentity();
-
-    m_mvpMatrix.perspective(90.0f, aspect, 1.0f, 30.0f); // projection
-    m_mvpMatrix.lookAt(QVector3D(3, 3, 3), QVector3D(0, 0, 0), QVector3D(0, 1, 0)); // view
-    //m_mvpMatrix.translate(QVector3D(-10, 0, 0));
-
-    // Load uniforms
-    glUseProgram(m_program);
-    m_mvpMatrixUnif = glGetUniformLocation(m_program, "mvpMatrix");
-    m_qprogram->setUniformValue("mvpMatrix", m_mvpMatrix);
-    glUseProgram(0);
+    // Change width and height
+    m_width = w;
+    m_height = h;
+    recalcMvpMatrix();
 }
