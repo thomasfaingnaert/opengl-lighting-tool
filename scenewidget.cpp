@@ -144,6 +144,44 @@ void SceneWidget::initData()
         1.0f, 1.0f, 0.0f,
         1.0f, 1.0f, 0.0f,
         1.0f, 1.0f, 0.0f,
+
+        /* NORMALS */
+
+        // Front face
+        +0.0f, +0.0f, +1.0f,
+        +0.0f, +0.0f, +1.0f,
+        +0.0f, +0.0f, +1.0f,
+        +0.0f, +0.0f, +1.0f,
+
+        // Right face
+        +1.0f, +0.0f, +0.0f,
+        +1.0f, +0.0f, +0.0f,
+        +1.0f, +0.0f, +0.0f,
+        +1.0f, +0.0f, +0.0f,
+
+        // Top face
+        +0.0f, +1.0f, +0.0f,
+        +0.0f, +1.0f, +0.0f,
+        +0.0f, +1.0f, +0.0f,
+        +0.0f, +1.0f, +0.0f,
+
+        // Back face
+        +0.0f, +0.0f, -1.0f,
+        +0.0f, +0.0f, -1.0f,
+        +0.0f, +0.0f, -1.0f,
+        +0.0f, +0.0f, -1.0f,
+
+        // Left face
+        -1.0f, +0.0f, +0.0f,
+        -1.0f, +0.0f, +0.0f,
+        -1.0f, +0.0f, +0.0f,
+        -1.0f, +0.0f, +0.0f,
+
+        // Bottom face
+        +0.0f, -1.0f, +0.0f,
+        +0.0f, -1.0f, +0.0f,
+        +0.0f, -1.0f, +0.0f,
+        +0.0f, -1.0f, +0.0f,
     };
 
     // Indices
@@ -196,6 +234,10 @@ void SceneWidget::initData()
     // Color attribute
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void*>(numOfVertices * 3 * sizeof(GLfloat)));
+
+    // Normal attribute
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void*>(numOfVertices * 3 * sizeof (GLfloat) * 2));
 
     // Fill in indices buffer
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof indices, indices, GL_STATIC_DRAW);
