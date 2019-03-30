@@ -240,7 +240,6 @@ void SceneWidget::recalcMvpMatrix()
 
     // Load uniforms
     glUseProgram(m_program);
-    m_mvpMatrixUnif = glGetUniformLocation(m_program, "mvpMatrix");
     m_qprogram->setUniformValue("mvpMatrix", m_mvpMatrix);
     glUseProgram(0);
 }

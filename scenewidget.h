@@ -31,7 +31,6 @@ private:
     GLuint m_vao;
     GLuint m_vertexDataVbo;
     GLuint m_indicesVbo;
-    GLint m_mvpMatrixUnif;
 
     int m_width;
     int m_height;
