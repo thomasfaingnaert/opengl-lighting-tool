@@ -61,6 +61,8 @@ void SceneWidget::initData()
     // Data
     GLfloat data[] =
     {
+        /* POSITIONS */
+
         // Front face
         -1.0f, -1.0f, +1.0f,
         -1.0f, +1.0f, +1.0f,
@@ -96,6 +98,45 @@ void SceneWidget::initData()
         -1.0f, -1.0f, -1.0f,
         +1.0f, -1.0f, -1.0f,
         +1.0f, -1.0f, +1.0f,
+
+
+        /* COLORS */
+
+        // Front face
+        1.0f, 0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,
+
+        // Right face
+        0.0f, 1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,
+
+        // Top face
+        0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
+
+        // Back face
+        0.0f, 1.0f, 1.0f,
+        0.0f, 1.0f, 1.0f,
+        0.0f, 1.0f, 1.0f,
+        0.0f, 1.0f, 1.0f,
+
+        // Left face
+        1.0f, 0.0f, 1.0f,
+        1.0f, 0.0f, 1.0f,
+        1.0f, 0.0f, 1.0f,
+        1.0f, 0.0f, 1.0f,
+
+        // Bottom face
+        1.0f, 1.0f, 0.0f,
+        1.0f, 1.0f, 0.0f,
+        1.0f, 1.0f, 0.0f,
+        1.0f, 1.0f, 0.0f,
     };
 
     // Indices
@@ -131,17 +172,23 @@ void SceneWidget::initData()
     glBindVertexArray(m_vao);
 
     // Create and bind position vbo
-    glGenBuffers(1, &m_positionVbo);
-    glBindBuffer(GL_ARRAY_BUFFER, m_positionVbo);
+    glGenBuffers(1, &m_vertexDataVbo);
+    glBindBuffer(GL_ARRAY_BUFFER, m_vertexDataVbo);
 
     // Create and bind indices vbo
     glGenBuffers(1, &m_indicesVbo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indicesVbo);
 
-    // Fill position buffer & associate with attrib
+    // Fill position buffer
     glBufferData(GL_ARRAY_BUFFER, sizeof data, data, GL_STATIC_DRAW);
+
+    // Position attribute
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void*>(0));
+
+    // Color attribute
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void*>(numOfVertices * 3 * sizeof(GLfloat)));
 
     // Fill in indices buffer
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof indices, indices, GL_STATIC_DRAW);
@@ -174,8 +221,8 @@ void SceneWidget::resizeGL(int w, int h)
     m_mvpMatrix.setToIdentity();
 
     m_mvpMatrix.perspective(90.0f, aspect, 1.0f, 30.0f); // projection
-    m_mvpMatrix.lookAt(QVector3D(0, 0, 10), QVector3D(0, 0, 0), QVector3D(0, 1, 0)); // view
-    m_mvpMatrix.translate(QVector3D(-10, 0, 0));
+    m_mvpMatrix.lookAt(QVector3D(3, 3, 3), QVector3D(0, 0, 0), QVector3D(0, 1, 0)); // view
+    //m_mvpMatrix.translate(QVector3D(-10, 0, 0));
 
     // Load uniforms
     glUseProgram(m_program);
