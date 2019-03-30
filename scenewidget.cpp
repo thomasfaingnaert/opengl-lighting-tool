@@ -47,7 +47,6 @@ void SceneWidget::initProgram()
     m_qprogram->addShaderFromSourceFile(QOpenGLShader::Fragment, "fragment.glsl");
     m_qprogram->link();
     m_program = m_qprogram->programId();
-
 }
 
 void SceneWidget::initData()
@@ -60,18 +59,31 @@ void SceneWidget::initData()
         +0.0f, +0.5f, +0.0f,
     };
 
+    // Indices
+    GLushort indices[] =
+    {
+        0, 1, 2
+    };
+
     // Create and bind vao
     glGenVertexArrays(1, &m_vao);
     glBindVertexArray(m_vao);
 
-    // Create and bind vbo
+    // Create and bind position vbo
     glGenBuffers(1, &m_positionVbo);
     glBindBuffer(GL_ARRAY_BUFFER, m_positionVbo);
 
-    // Fill buffer & associate with attrib
+    // Create and bind indices vbo
+    glGenBuffers(1, &m_indicesVbo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indicesVbo);
+
+    // Fill position buffer & associate with attrib
     glBufferData(GL_ARRAY_BUFFER, sizeof data, data, GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void*>(0));
+
+    // Fill in indices buffer
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof indices, indices, GL_STATIC_DRAW);
 
     // Cleanup
     glBindVertexArray(0);
@@ -85,7 +97,7 @@ void SceneWidget::paintGL()
     glUseProgram(m_program);
     glBindVertexArray(m_vao);
 
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, reinterpret_cast<void*>(0));
 
     glBindVertexArray(0);
     glUseProgram(0);

@@ -28,6 +28,7 @@ private:
     GLuint m_program;
     GLuint m_vao;
     GLuint m_positionVbo;
+    GLuint m_indicesVbo;
 };
 
 #endif // SCENEWIDGET_H
