@@ -34,7 +34,7 @@ void SceneWidget::initializeGL()
                  "\nRenderer: " << glGetString(GL_RENDERER) <<
                  "\nVendor: " << glGetString(GL_VENDOR) << '\n' << std::endl;
 
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClearDepth(1.0);
 
     // Enable face culling
