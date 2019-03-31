@@ -24,6 +24,7 @@ private:
     void initProgram();
     void initData();
     void recalcMvpMatrix();
+    void setLightingParams();
 
     QOpenGLShaderProgram *m_qprogram;
 
@@ -38,6 +39,16 @@ private:
 
     QMatrix4x4 m_mvMatrix;
     QMatrix4x4 m_pMatrix;
+
+    QVector3D m_lightPosition;
+    QVector3D m_lightAmbient;
+    QVector3D m_lightDiffuse;
+    QVector3D m_lightSpecular;
+
+    float m_materialShininess;
+    QVector3D m_materialAmbient;
+    QVector3D m_materialDiffuse;
+    QVector3D m_materialSpecular;
 
     constexpr static unsigned int numOfVertices = 24;
 };

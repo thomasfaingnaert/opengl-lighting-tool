@@ -4,7 +4,15 @@
 #include "scenewidget.h"
 
 SceneWidget::SceneWidget(QWidget *parent)
-    : QOpenGLWidget (parent)
+    : QOpenGLWidget (parent),
+      m_lightPosition(0.0f, 1.0f, 0.0f),
+      m_lightAmbient(0.2f, 0.2f, 0.2f),
+      m_lightDiffuse(1.0f, 1.0f, 1.0f),
+      m_lightSpecular(1.0f, 1.0f, 1.0f),
+      m_materialShininess(100.0f),
+      m_materialAmbient(1.0f, 0.0f, 1.0f),
+      m_materialDiffuse(1.0f, 0.8f, 0.0f),
+      m_materialSpecular(1.0f, 0.8f, 0.0f)
 {
     // Set OpenGL version and profile
     QSurfaceFormat format;
@@ -52,6 +60,7 @@ void SceneWidget::initializeGL()
 
     initProgram();
     initData();
+    setLightingParams();
 }
 
 void SceneWidget::initProgram()
@@ -285,6 +294,23 @@ void SceneWidget::recalcMvpMatrix()
     glUseProgram(m_program);
     m_qprogram->setUniformValue("mvMatrix", m_mvMatrix);
     m_qprogram->setUniformValue("pMatrix", m_pMatrix);
+    glUseProgram(0);
+}
+
+void SceneWidget::setLightingParams()
+{
+    glUseProgram(m_program);
+
+    m_qprogram->setUniformValue("lightPosition", m_lightPosition);
+    m_qprogram->setUniformValue("lightAmbient", m_lightAmbient);
+    m_qprogram->setUniformValue("lightDiffuse", m_lightDiffuse);
+    m_qprogram->setUniformValue("lightSpecular", m_lightSpecular);
+
+    m_qprogram->setUniformValue("materialShininess", m_materialShininess);
+    m_qprogram->setUniformValue("materialAmbient", m_materialAmbient);
+    m_qprogram->setUniformValue("materialDiffuse", m_materialDiffuse);
+    m_qprogram->setUniformValue("materialSpecular", m_materialSpecular);
+
     glUseProgram(0);
 }
 

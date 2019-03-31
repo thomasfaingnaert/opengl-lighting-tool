@@ -9,21 +9,18 @@ smooth out vec3 outColor;
 uniform mat4 mvMatrix;
 uniform mat4 pMatrix;
 
+uniform vec3 lightPosition;
+uniform vec3 lightAmbient;
+uniform vec3 lightDiffuse;
+uniform vec3 lightSpecular;
+
+uniform float materialShininess;
+uniform vec3 materialAmbient;
+uniform vec3 materialDiffuse;
+uniform vec3 materialSpecular;
+
 void main()
 {
-    // Inputs
-    vec3 lightPosition = vec3(0.0, 1.0, 0.0);                       // in view space
-
-    vec3 lightAmbient = vec3(0.2, 0.2, 0.2);
-    vec3 lightDiffuse = vec3(1.0, 1.0, 1.0);
-    vec3 lightSpecular = vec3(1.0, 1.0, 1.0);
-
-    float materialShininess = 100.0;
-
-    vec3 materialAmbient = vec3(1.0, 0.0, 1.0);
-    vec3 materialDiffuse = vec3(1.0, 0.8, 0.0);
-    vec3 materialSpecular = vec3(1.0, 0.8, 0.0);
-
     vec3 ambientProduct = lightAmbient * materialAmbient;
     vec3 diffuseProduct = lightDiffuse * materialDiffuse;
     vec3 specularProduct = lightSpecular * materialSpecular;
