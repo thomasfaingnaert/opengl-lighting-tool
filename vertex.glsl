@@ -12,41 +12,41 @@ uniform mat4 pMatrix;
 void main()
 {
     // Inputs
-    vec4 lightPosition = vec4(0.0, 1.0, 0.0, 0.0); // in view space
+    vec3 lightPosition = vec3(0.0, 1.0, 0.0);                       // in view space
 
-    vec4 lightAmbient = vec4(0.2, 0.2, 0.2, 1.0);
-    vec4 lightDiffuse = vec4(1.0, 1.0, 1.0, 1.0);
-    vec4 lightSpecular = vec4(1.0, 1.0, 1.0, 1.0);
+    vec3 lightAmbient = vec3(0.2, 0.2, 0.2);
+    vec3 lightDiffuse = vec3(1.0, 1.0, 1.0);
+    vec3 lightSpecular = vec3(1.0, 1.0, 1.0);
 
     float materialShininess = 100.0;
 
-    vec4 materialAmbient = vec4(1.0, 0.0, 1.0, 1.0);
-    vec4 materialDiffuse = vec4(1.0, 0.8, 0.0, 1.0);
-    vec4 materialSpecular = vec4(1.0, 0.8, 0.0, 1.0);
+    vec3 materialAmbient = vec3(1.0, 0.0, 1.0);
+    vec3 materialDiffuse = vec3(1.0, 0.8, 0.0);
+    vec3 materialSpecular = vec3(1.0, 0.8, 0.0);
 
-    vec4 ambientProduct = lightAmbient * materialAmbient;
-    vec4 diffuseProduct = lightDiffuse * materialDiffuse;
-    vec4 specularProduct = lightSpecular * materialSpecular;
+    vec3 ambientProduct = lightAmbient * materialAmbient;
+    vec3 diffuseProduct = lightDiffuse * materialDiffuse;
+    vec3 specularProduct = lightSpecular * materialSpecular;
 
     // Calculate outputs
     vec3 viewSpacePosition = vec3(mvMatrix * vec4(position, 1.0));  // position of vertex in view space
 
-    vec3 L = normalize(lightPosition.xyz - viewSpacePosition);      // vector from vertex to light source
+    vec3 L = normalize(lightPosition - viewSpacePosition);          // vector from vertex to light source
     vec3 E = normalize(-viewSpacePosition);                         // vector from vertex to camera (at the origin)
     vec3 H = normalize(L + E);                                      // "half-way" vector
     vec3 N = vec3(normalize(mvMatrix * vec4(normal, 0.0)));         // normal vector in view space
 
-    vec4 ambient = ambientProduct;
+    vec3 ambient = ambientProduct;
 
     float Kd = max(dot(L, N), 0.0);
-    vec4 diffuse = Kd * diffuseProduct;
+    vec3 diffuse = Kd * diffuseProduct;
 
     float Ks = pow(max(dot(N, H), 0.0), materialShininess);
-    vec4 specular = Ks * specularProduct;
+    vec3 specular = Ks * specularProduct;
 
     if (dot(L, N) < 0.0)
-        specular = vec4(0.0, 0.0, 0.0, 1.0);
+        specular = vec3(0.0, 0.0, 0.0);
 
-    gl_Position = pMatrix * mvMatrix * vec4(position, 1.0f);
-    outColor = (ambient + diffuse + specular).xyz;
+    gl_Position = pMatrix * mvMatrix * vec4(position, 1.0);
+    outColor = ambient + diffuse + specular;
 }
