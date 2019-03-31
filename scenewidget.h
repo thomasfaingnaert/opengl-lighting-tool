@@ -11,6 +11,8 @@
 
 class SceneWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_2_Core
 {
+    Q_OBJECT
+
 public:
     SceneWidget(QWidget *parent = nullptr);
     ~SceneWidget();
@@ -19,6 +21,31 @@ protected:
     virtual void initializeGL();
     virtual void paintGL();
     virtual void resizeGL(int w, int h);
+
+public slots:
+    void setLightPositionX(int x) { m_lightPosition.setX(x / 10.0f); setLightingParams(); }
+    void setLightPositionY(int y) { m_lightPosition.setY(y / 10.0f); setLightingParams(); }
+    void setLightPositionZ(int z) { m_lightPosition.setZ(z / 10.0f); setLightingParams(); }
+    void setLightAmbientX(int x) { m_lightAmbient.setX(x / 256.0); setLightingParams(); }
+    void setLightAmbientY(int y) { m_lightAmbient.setY(y / 256.0); setLightingParams(); }
+    void setLightAmbientZ(int z) { m_lightAmbient.setZ(z / 256.0); setLightingParams(); }
+    void setLightDiffuseX(int x) { m_lightDiffuse.setX(x / 256.0); setLightingParams(); }
+    void setLightDiffuseY(int y) { m_lightDiffuse.setY(y / 256.0); setLightingParams(); }
+    void setLightDiffuseZ(int z) { m_lightDiffuse.setZ(z / 256.0); setLightingParams(); }
+    void setLightSpecularX(int x) { m_lightSpecular.setX(x / 256.0); setLightingParams(); }
+    void setLightSpecularY(int y) { m_lightSpecular.setY(y / 256.0); setLightingParams(); }
+    void setLightSpecularZ(int z) { m_lightSpecular.setZ(z / 256.0); setLightingParams(); }
+
+    void setMaterialShininess(int shininess) { m_materialShininess = shininess; setLightingParams(); }
+    void setMaterialAmbientX(int x) { m_lightAmbient.setX(x / 256.0); setLightingParams(); }
+    void setMaterialAmbientY(int y) { m_lightAmbient.setY(y / 256.0); setLightingParams(); }
+    void setMaterialAmbientZ(int z) { m_lightAmbient.setZ(z / 256.0); setLightingParams(); }
+    void setMaterialDiffuseX(int x) { m_lightDiffuse.setX(x / 256.0); setLightingParams(); }
+    void setMaterialDiffuseY(int y) { m_lightDiffuse.setY(y / 256.0); setLightingParams(); }
+    void setMaterialDiffuseZ(int z) { m_lightDiffuse.setZ(z / 256.0); setLightingParams(); }
+    void setMaterialSpecularX(int x) { m_lightSpecular.setX(x / 256.0); setLightingParams(); }
+    void setMaterialSpecularY(int y) { m_lightSpecular.setY(y / 256.0); setLightingParams(); }
+    void setMaterialSpecularZ(int z) { m_lightSpecular.setZ(z / 256.0); setLightingParams(); }
 
 private:
     void initProgram();
