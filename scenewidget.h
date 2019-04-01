@@ -37,15 +37,15 @@ public slots:
     void setLightSpecularZ(int z) { m_lightSpecular.setZ(z / 256.0); setLightingParams(); }
 
     void setMaterialShininess(int shininess) { m_materialShininess = shininess; setLightingParams(); }
-    void setMaterialAmbientX(int x) { m_lightAmbient.setX(x / 256.0); setLightingParams(); }
-    void setMaterialAmbientY(int y) { m_lightAmbient.setY(y / 256.0); setLightingParams(); }
-    void setMaterialAmbientZ(int z) { m_lightAmbient.setZ(z / 256.0); setLightingParams(); }
-    void setMaterialDiffuseX(int x) { m_lightDiffuse.setX(x / 256.0); setLightingParams(); }
-    void setMaterialDiffuseY(int y) { m_lightDiffuse.setY(y / 256.0); setLightingParams(); }
-    void setMaterialDiffuseZ(int z) { m_lightDiffuse.setZ(z / 256.0); setLightingParams(); }
-    void setMaterialSpecularX(int x) { m_lightSpecular.setX(x / 256.0); setLightingParams(); }
-    void setMaterialSpecularY(int y) { m_lightSpecular.setY(y / 256.0); setLightingParams(); }
-    void setMaterialSpecularZ(int z) { m_lightSpecular.setZ(z / 256.0); setLightingParams(); }
+    void setMaterialAmbientX(int x) { m_materialAmbient.setX(x / 256.0); setLightingParams(); }
+    void setMaterialAmbientY(int y) { m_materialAmbient.setY(y / 256.0); setLightingParams(); }
+    void setMaterialAmbientZ(int z) { m_materialAmbient.setZ(z / 256.0); setLightingParams(); }
+    void setMaterialDiffuseX(int x) { m_materialDiffuse.setX(x / 256.0); setLightingParams(); }
+    void setMaterialDiffuseY(int y) { m_materialDiffuse.setY(y / 256.0); setLightingParams(); }
+    void setMaterialDiffuseZ(int z) { m_materialDiffuse.setZ(z / 256.0); setLightingParams(); }
+    void setMaterialSpecularX(int x) { m_materialSpecular.setX(x / 256.0); setLightingParams(); }
+    void setMaterialSpecularY(int y) { m_materialSpecular.setY(y / 256.0); setLightingParams(); }
+    void setMaterialSpecularZ(int z) { m_materialSpecular.setZ(z / 256.0); setLightingParams(); }
 
     void setEnableAmbient(bool b) { m_enableAmbient = b; setLightingParams(); }
     void setEnableDiffuse(bool b) { m_enableDiffuse = b; setLightingParams(); }
