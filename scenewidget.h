@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include <memory>
+#include <string>
 
 #include <QObject>
 #include <QOpenGLFunctions_3_2_Core>
@@ -60,15 +61,20 @@ public slots:
     void setRotationSpeed(int speed) { m_rotationSpeed = speed / 100.0f; }
     void resetRotation() { m_angle = 0.0f; }
 
+    void setPhongShading(bool b) { m_usePhong = b; }
+
 private:
-    void initProgram();
+    void initProgram(QOpenGLShaderProgram *&qprogram, GLuint &programId, const std::string &vertexShader, const std::string &fragmentShader);
     void initData();
     void recalcMvpMatrix();
     void setLightingParams();
+    void setLightingParamsForProgram(QOpenGLShaderProgram *qprogram, GLuint program);
 
     QOpenGLShaderProgram *m_qprogram;
+    QOpenGLShaderProgram *m_qprogramPhong;
 
     GLuint m_program;
+    GLuint m_programPhong;
     GLuint m_vao;
     GLuint m_vertexDataVbo;
     GLuint m_indicesVbo;
@@ -101,7 +107,10 @@ private:
     bool m_enableRotation = true;
     float m_rotationSpeed = 0.75f;
 
+    bool m_usePhong = false;
+
     constexpr static unsigned int numOfVertices = 24;
+
 };
 
 #endif // SCENEWIDGET_H

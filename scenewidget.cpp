@@ -31,6 +31,7 @@ SceneWidget::SceneWidget(QWidget *parent)
 SceneWidget::~SceneWidget()
 {
     delete m_qprogram;
+    delete m_qprogramPhong;
 }
 
 void SceneWidget::initializeGL()
@@ -59,18 +60,19 @@ void SceneWidget::initializeGL()
     glDepthMask(GL_TRUE);
     glDepthRange(0.0, 1.0);
 
-    initProgram();
+    initProgram(m_qprogram, m_program, "vertex.glsl", "fragment.glsl");
+    initProgram(m_qprogramPhong, m_programPhong, "vertex_phong.glsl", "fragment_phong.glsl");
     initData();
     setLightingParams();
 }
 
-void SceneWidget::initProgram()
+void SceneWidget::initProgram(QOpenGLShaderProgram *&qprogram, GLuint &programId, const std::string &vertexShader, const std::string &fragmentShader)
 {
-    m_qprogram = new QOpenGLShaderProgram(this);
-    m_qprogram->addShaderFromSourceFile(QOpenGLShader::Vertex, "vertex.glsl");
-    m_qprogram->addShaderFromSourceFile(QOpenGLShader::Fragment, "fragment.glsl");
-    m_qprogram->link();
-    m_program = m_qprogram->programId();
+    qprogram = new QOpenGLShaderProgram(this);
+    qprogram->addShaderFromSourceFile(QOpenGLShader::Vertex, vertexShader.c_str());
+    qprogram->addShaderFromSourceFile(QOpenGLShader::Fragment, fragmentShader.c_str());
+    qprogram->link();
+    programId = qprogram->programId();
 }
 
 void SceneWidget::initData()
@@ -219,7 +221,7 @@ void SceneWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glUseProgram(m_program);
+    glUseProgram(m_usePhong ? m_programPhong : m_program);
     glBindVertexArray(m_vao);
 
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, reinterpret_cast<void*>(0));
@@ -260,8 +262,14 @@ void SceneWidget::recalcMvpMatrix()
     m_pMatrix.setToIdentity();
     m_pMatrix.perspective(90.0f, aspect, 1.0f, 30.0f); // projection
 
-    // Load uniforms
+    // Load uniforms (gourard)
     glUseProgram(m_program);
+    m_qprogram->setUniformValue("mvMatrix", m_mvMatrix);
+    m_qprogram->setUniformValue("pMatrix", m_pMatrix);
+    glUseProgram(0);
+
+    // Load uniforms (phong)
+    glUseProgram(m_programPhong);
     m_qprogram->setUniformValue("mvMatrix", m_mvMatrix);
     m_qprogram->setUniformValue("pMatrix", m_pMatrix);
     glUseProgram(0);
@@ -269,17 +277,23 @@ void SceneWidget::recalcMvpMatrix()
 
 void SceneWidget::setLightingParams()
 {
-    glUseProgram(m_program);
+    setLightingParamsForProgram(m_qprogram, m_program);
+    setLightingParamsForProgram(m_qprogramPhong, m_programPhong);
+}
 
-    m_qprogram->setUniformValue("lightPosition", m_lightPosition);
-    m_qprogram->setUniformValue("lightAmbient", m_enableAmbient ? m_lightAmbient : QVector3D(0.0, 0.0, 0.0));
-    m_qprogram->setUniformValue("lightDiffuse", m_enableDiffuse ? m_lightDiffuse : QVector3D(0.0, 0.0, 0.0));
-    m_qprogram->setUniformValue("lightSpecular", m_enableSpecular ? m_lightSpecular : QVector3D(0.0, 0.0, 0.0));
+void SceneWidget::setLightingParamsForProgram(QOpenGLShaderProgram *qprogram, GLuint program)
+{
+    glUseProgram(program);
 
-    m_qprogram->setUniformValue("materialShininess", m_materialShininess);
-    m_qprogram->setUniformValue("materialAmbient", m_enableAmbient ? m_materialAmbient : QVector3D(0.0, 0.0, 0.0));
-    m_qprogram->setUniformValue("materialDiffuse", m_enableDiffuse ? m_materialDiffuse : QVector3D(0.0, 0.0, 0.0));
-    m_qprogram->setUniformValue("materialSpecular", m_enableSpecular ? m_materialSpecular : QVector3D(0.0, 0.0, 0.0));
+    qprogram->setUniformValue("lightPosition", m_lightPosition);
+    qprogram->setUniformValue("lightAmbient", m_enableAmbient ? m_lightAmbient : QVector3D(0.0, 0.0, 0.0));
+    qprogram->setUniformValue("lightDiffuse", m_enableDiffuse ? m_lightDiffuse : QVector3D(0.0, 0.0, 0.0));
+    qprogram->setUniformValue("lightSpecular", m_enableSpecular ? m_lightSpecular : QVector3D(0.0, 0.0, 0.0));
+
+    qprogram->setUniformValue("materialShininess", m_materialShininess);
+    qprogram->setUniformValue("materialAmbient", m_enableAmbient ? m_materialAmbient : QVector3D(0.0, 0.0, 0.0));
+    qprogram->setUniformValue("materialDiffuse", m_enableDiffuse ? m_materialDiffuse : QVector3D(0.0, 0.0, 0.0));
+    qprogram->setUniformValue("materialSpecular", m_enableSpecular ? m_materialSpecular : QVector3D(0.0, 0.0, 0.0));
 
     glUseProgram(0);
 }
