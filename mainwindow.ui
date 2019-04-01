@@ -39,7 +39,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
@@ -847,11 +847,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>543</x>
-     <y>88</y>
+     <y>87</y>
     </hint>
     <hint type="destinationlabel">
-     <x>429</x>
-     <y>97</y>
+     <x>413</x>
+     <y>87</y>
     </hint>
    </hints>
   </connection>
@@ -863,11 +863,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>588</x>
-     <y>120</y>
+     <y>113</y>
     </hint>
     <hint type="destinationlabel">
-     <x>396</x>
-     <y>161</y>
+     <x>397</x>
+     <y>113</y>
     </hint>
    </hints>
   </connection>
@@ -879,11 +879,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>596</x>
-     <y>147</y>
+     <y>145</y>
     </hint>
     <hint type="destinationlabel">
-     <x>400</x>
-     <y>208</y>
+     <x>390</x>
+     <y>145</y>
     </hint>
    </hints>
   </connection>
@@ -895,11 +895,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>583</x>
-     <y>222</y>
+     <y>225</y>
     </hint>
     <hint type="destinationlabel">
-     <x>355</x>
-     <y>259</y>
+     <x>356</x>
+     <y>225</y>
     </hint>
    </hints>
   </connection>
@@ -911,11 +911,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>613</x>
-     <y>256</y>
+     <y>257</y>
     </hint>
     <hint type="destinationlabel">
-     <x>355</x>
-     <y>335</y>
+     <x>362</x>
+     <y>257</y>
     </hint>
    </hints>
   </connection>
@@ -930,8 +930,8 @@
      <y>285</y>
     </hint>
     <hint type="destinationlabel">
-     <x>352</x>
-     <y>404</y>
+     <x>373</x>
+     <y>285</y>
     </hint>
    </hints>
   </connection>
@@ -959,11 +959,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>715</x>
-     <y>400</y>
+     <y>395</y>
     </hint>
     <hint type="destinationlabel">
-     <x>435</x>
-     <y>434</y>
+     <x>438</x>
+     <y>395</y>
     </hint>
    </hints>
   </connection>
@@ -975,11 +975,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>787</x>
-     <y>428</y>
+     <y>423</y>
     </hint>
     <hint type="destinationlabel">
      <x>436</x>
-     <y>497</y>
+     <y>423</y>
     </hint>
    </hints>
   </connection>
@@ -991,11 +991,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>570</x>
-     <y>513</y>
+     <y>508</y>
     </hint>
     <hint type="destinationlabel">
-     <x>395</x>
-     <y>530</y>
+     <x>398</x>
+     <y>508</y>
     </hint>
    </hints>
   </connection>
@@ -1007,11 +1007,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>776</x>
-     <y>535</y>
+     <y>538</y>
     </hint>
     <hint type="destinationlabel">
-     <x>388</x>
-     <y>550</y>
+     <x>394</x>
+     <y>538</y>
     </hint>
    </hints>
   </connection>
@@ -1039,11 +1039,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>599</x>
-     <y>108</y>
+     <y>114</y>
     </hint>
     <hint type="destinationlabel">
-     <x>376</x>
-     <y>135</y>
+     <x>379</x>
+     <y>114</y>
     </hint>
    </hints>
   </connection>
@@ -1071,11 +1071,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>569</x>
-     <y>249</y>
+     <y>253</y>
     </hint>
     <hint type="destinationlabel">
-     <x>417</x>
-     <y>295</y>
+     <x>427</x>
+     <y>253</y>
     </hint>
    </hints>
   </connection>
@@ -1087,11 +1087,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>569</x>
-     <y>279</y>
+     <y>283</y>
     </hint>
     <hint type="destinationlabel">
-     <x>399</x>
-     <y>342</y>
+     <x>405</x>
+     <y>283</y>
     </hint>
    </hints>
   </connection>
@@ -1103,11 +1103,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>569</x>
-     <y>359</y>
+     <y>367</y>
     </hint>
     <hint type="destinationlabel">
-     <x>409</x>
-     <y>396</y>
+     <x>418</x>
+     <y>367</y>
     </hint>
    </hints>
   </connection>
@@ -1119,11 +1119,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>569</x>
-     <y>388</y>
+     <y>394</y>
     </hint>
     <hint type="destinationlabel">
-     <x>432</x>
-     <y>443</y>
+     <x>438</x>
+     <y>394</y>
     </hint>
    </hints>
   </connection>
@@ -1135,11 +1135,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>569</x>
-     <y>417</y>
+     <y>423</y>
     </hint>
     <hint type="destinationlabel">
-     <x>447</x>
-     <y>486</y>
+     <x>441</x>
+     <y>423</y>
     </hint>
    </hints>
   </connection>
@@ -1199,11 +1199,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>550</x>
-     <y>139</y>
+     <y>136</y>
     </hint>
     <hint type="destinationlabel">
-     <x>406</x>
-     <y>188</y>
+     <x>412</x>
+     <y>136</y>
     </hint>
    </hints>
   </connection>
@@ -1218,8 +1218,8 @@
      <y>181</y>
     </hint>
     <hint type="destinationlabel">
-     <x>424</x>
-     <y>250</y>
+     <x>428</x>
+     <y>181</y>
     </hint>
    </hints>
   </connection>
@@ -1231,11 +1231,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>547</x>
-     <y>105</y>
+     <y>91</y>
     </hint>
     <hint type="destinationlabel">
-     <x>433</x>
-     <y>118</y>
+     <x>441</x>
+     <y>91</y>
     </hint>
    </hints>
   </connection>
@@ -1247,11 +1247,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>602</x>
-     <y>474</y>
+     <y>469</y>
     </hint>
     <hint type="destinationlabel">
-     <x>441</x>
-     <y>398</y>
+     <x>435</x>
+     <y>469</y>
     </hint>
    </hints>
   </connection>
@@ -1263,11 +1263,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>613</x>
-     <y>509</y>
+     <y>512</y>
     </hint>
     <hint type="destinationlabel">
-     <x>428</x>
-     <y>468</y>
+     <x>432</x>
+     <y>512</y>
     </hint>
    </hints>
   </connection>
@@ -1279,11 +1279,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>698</x>
-     <y>555</y>
+     <y>553</y>
     </hint>
     <hint type="destinationlabel">
-     <x>394</x>
-     <y>515</y>
+     <x>404</x>
+     <y>553</y>
     </hint>
    </hints>
   </connection>
