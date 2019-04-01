@@ -1,6 +1,7 @@
 #ifndef SCENEWIDGET_H
 #define SCENEWIDGET_H
 
+#include <cmath>
 #include <memory>
 
 #include <QObject>
@@ -51,6 +52,10 @@ public slots:
     void setEnableDiffuse(bool b) { m_enableDiffuse = b; setLightingParams(); }
     void setEnableSpecular(bool b) { m_enableSpecular = b; setLightingParams(); }
 
+    void setCameraRadius(int f) { m_cameraRadius = f / 10.0f; recalcMvpMatrix(); }
+    void setCameraTheta(int f) { m_cameraTheta = f / 180.0f * M_PI; recalcMvpMatrix(); }
+    void setCameraPhi(int f) { m_cameraPhi = f / 180.0f * M_PI; recalcMvpMatrix(); }
+
 private:
     void initProgram();
     void initData();
@@ -84,6 +89,10 @@ private:
     bool m_enableAmbient = true;
     bool m_enableDiffuse = true;
     bool m_enableSpecular = true;
+
+    float m_cameraRadius = 3.0f;
+    float m_cameraTheta = 45.0f; // degrees
+    float m_cameraPhi = 45.0f; // degrees
 
     constexpr static unsigned int numOfVertices = 24;
 };

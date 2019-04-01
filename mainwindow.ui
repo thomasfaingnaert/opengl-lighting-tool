@@ -39,11 +39,11 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
-        <string>Lighting Calculations</string>
+        <string>General Settings</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
@@ -88,8 +88,85 @@
         <item>
          <widget class="QGroupBox" name="groupBox_10">
           <property name="title">
-           <string>GroupBox</string>
+           <string>Camera Location (spherical coords)</string>
           </property>
+          <layout class="QGridLayout" name="gridLayout_12">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_23">
+             <property name="text">
+              <string>Radius:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QSlider" name="horizontalSlider">
+             <property name="maximum">
+              <number>99</number>
+             </property>
+             <property name="value">
+              <number>30</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_24">
+             <property name="text">
+              <string>Theta:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QSlider" name="horizontalSlider_2">
+             <property name="maximum">
+              <number>359</number>
+             </property>
+             <property name="singleStep">
+              <number>5</number>
+             </property>
+             <property name="pageStep">
+              <number>35</number>
+             </property>
+             <property name="value">
+              <number>45</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_25">
+             <property name="text">
+              <string>Phi:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QSlider" name="horizontalSlider_3">
+             <property name="minimum">
+              <number>-90</number>
+             </property>
+             <property name="maximum">
+              <number>90</number>
+             </property>
+             <property name="singleStep">
+              <number>2</number>
+             </property>
+             <property name="pageStep">
+              <number>20</number>
+             </property>
+             <property name="value">
+              <number>45</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
@@ -705,6 +782,9 @@
     <slot>setEnableAmbient(bool)</slot>
     <slot>setEnableDiffuse(bool)</slot>
     <slot>setEnableSpecular(bool)</slot>
+    <slot>setCameraRadius(int)</slot>
+    <slot>setCameraPhi(int)</slot>
+    <slot>setCameraTheta(int)</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -1107,6 +1187,54 @@
     <hint type="destinationlabel">
      <x>433</x>
      <y>118</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>openGLWidget</receiver>
+   <slot>setCameraRadius(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>602</x>
+     <y>405</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>441</x>
+     <y>398</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>openGLWidget</receiver>
+   <slot>setCameraTheta(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>613</x>
+     <y>464</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>428</x>
+     <y>468</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_3</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>openGLWidget</receiver>
+   <slot>setCameraPhi(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>698</x>
+     <y>534</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>394</x>
+     <y>515</y>
     </hint>
    </hints>
   </connection>

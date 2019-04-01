@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 #include <stdexcept>
 
@@ -284,7 +285,15 @@ void SceneWidget::recalcMvpMatrix()
     const float aspect = static_cast<float>(m_width) / m_height;
 
     m_mvMatrix.setToIdentity();
-    m_mvMatrix.lookAt(QVector3D(3, 3, 3), QVector3D(0, 0, 0), QVector3D(0, 1, 0)); // view
+
+    const QVector3D eye
+    {
+        m_cameraRadius * std::cos(m_cameraPhi) * std::cos(m_cameraTheta),
+        m_cameraRadius * std::sin(m_cameraPhi),
+        m_cameraRadius * std::cos(m_cameraPhi) * std::sin(m_cameraTheta)
+    };
+
+    m_mvMatrix.lookAt(eye, QVector3D(0, 0, 0), QVector3D(0, 1, 0)); // view
     m_mvMatrix.rotate(m_angle, QVector3D(1, 0, 0)); // model
 
     m_pMatrix.setToIdentity();
