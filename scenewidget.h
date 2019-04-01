@@ -47,6 +47,10 @@ public slots:
     void setMaterialSpecularY(int y) { m_lightSpecular.setY(y / 256.0); setLightingParams(); }
     void setMaterialSpecularZ(int z) { m_lightSpecular.setZ(z / 256.0); setLightingParams(); }
 
+    void setEnableAmbient(bool b) { m_enableAmbient = b; setLightingParams(); }
+    void setEnableDiffuse(bool b) { m_enableDiffuse = b; setLightingParams(); }
+    void setEnableSpecular(bool b) { m_enableSpecular = b; setLightingParams(); }
+
 private:
     void initProgram();
     void initData();
@@ -76,6 +80,10 @@ private:
     QVector3D m_materialAmbient;
     QVector3D m_materialDiffuse;
     QVector3D m_materialSpecular;
+
+    bool m_enableAmbient = true;
+    bool m_enableDiffuse = true;
+    bool m_enableSpecular = true;
 
     constexpr static unsigned int numOfVertices = 24;
 };

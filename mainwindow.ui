@@ -41,6 +41,59 @@
       <property name="currentIndex">
        <number>0</number>
       </property>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Lighting Calculations</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QGroupBox" name="groupBox_9">
+          <property name="title">
+           <string>Components</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QCheckBox" name="checkBox_2">
+             <property name="text">
+              <string>Enable ambient</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox">
+             <property name="text">
+              <string>Enable diffuse</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox_3">
+             <property name="text">
+              <string>Enable specular</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_10">
+          <property name="title">
+           <string>GroupBox</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="tab">
        <attribute name="title">
         <string>Light Properties</string>
@@ -649,6 +702,9 @@
     <slot>setMaterialSpecularX(int)</slot>
     <slot>setMaterialSpecularY(int)</slot>
     <slot>setMaterialSpecularZ(int)</slot>
+    <slot>setEnableAmbient(bool)</slot>
+    <slot>setEnableDiffuse(bool)</slot>
+    <slot>setEnableSpecular(bool)</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -853,8 +909,8 @@
    <slot>setMaterialShininess(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>111</y>
+     <x>599</x>
+     <y>108</y>
     </hint>
     <hint type="destinationlabel">
      <x>376</x>
@@ -869,8 +925,8 @@
    <slot>setMaterialAmbientX(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>546</x>
-     <y>225</y>
+     <x>569</x>
+     <y>219</y>
     </hint>
     <hint type="destinationlabel">
      <x>404</x>
@@ -885,8 +941,8 @@
    <slot>setMaterialAmbientY(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>594</x>
-     <y>262</y>
+     <x>569</x>
+     <y>249</y>
     </hint>
     <hint type="destinationlabel">
      <x>417</x>
@@ -901,8 +957,8 @@
    <slot>setMaterialAmbientZ(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>630</x>
-     <y>292</y>
+     <x>569</x>
+     <y>279</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -917,8 +973,8 @@
    <slot>setMaterialDiffuseX(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>366</y>
+     <x>569</x>
+     <y>359</y>
     </hint>
     <hint type="destinationlabel">
      <x>409</x>
@@ -933,8 +989,8 @@
    <slot>setMaterialDiffuseY(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>637</x>
-     <y>396</y>
+     <x>569</x>
+     <y>388</y>
     </hint>
     <hint type="destinationlabel">
      <x>432</x>
@@ -949,8 +1005,8 @@
    <slot>setMaterialDiffuseZ(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>670</x>
-     <y>431</y>
+     <x>569</x>
+     <y>417</y>
     </hint>
     <hint type="destinationlabel">
      <x>447</x>
@@ -965,8 +1021,8 @@
    <slot>setMaterialSpecularX(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>638</x>
-     <y>502</y>
+     <x>569</x>
+     <y>500</y>
     </hint>
     <hint type="destinationlabel">
      <x>437</x>
@@ -981,8 +1037,8 @@
    <slot>setMaterialSpecularY(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>679</x>
-     <y>534</y>
+     <x>569</x>
+     <y>530</y>
     </hint>
     <hint type="destinationlabel">
      <x>449</x>
@@ -997,12 +1053,60 @@
    <slot>setMaterialSpecularZ(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>718</x>
-     <y>567</y>
+     <x>569</x>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>436</x>
      <y>575</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>openGLWidget</receiver>
+   <slot>setEnableDiffuse(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>550</x>
+     <y>185</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>406</x>
+     <y>188</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_3</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>openGLWidget</receiver>
+   <slot>setEnableSpecular(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>557</x>
+     <y>250</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>424</x>
+     <y>250</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_2</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>openGLWidget</receiver>
+   <slot>setEnableAmbient(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>547</x>
+     <y>128</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>433</x>
+     <y>118</y>
     </hint>
    </hints>
   </connection>

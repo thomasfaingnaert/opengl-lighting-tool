@@ -302,14 +302,14 @@ void SceneWidget::setLightingParams()
     glUseProgram(m_program);
 
     m_qprogram->setUniformValue("lightPosition", m_lightPosition);
-    m_qprogram->setUniformValue("lightAmbient", m_lightAmbient);
-    m_qprogram->setUniformValue("lightDiffuse", m_lightDiffuse);
-    m_qprogram->setUniformValue("lightSpecular", m_lightSpecular);
+    m_qprogram->setUniformValue("lightAmbient", m_enableAmbient ? m_lightAmbient : QVector3D(0.0, 0.0, 0.0));
+    m_qprogram->setUniformValue("lightDiffuse", m_enableDiffuse ? m_lightDiffuse : QVector3D(0.0, 0.0, 0.0));
+    m_qprogram->setUniformValue("lightSpecular", m_enableSpecular ? m_lightSpecular : QVector3D(0.0, 0.0, 0.0));
 
     m_qprogram->setUniformValue("materialShininess", m_materialShininess);
-    m_qprogram->setUniformValue("materialAmbient", m_materialAmbient);
-    m_qprogram->setUniformValue("materialDiffuse", m_materialDiffuse);
-    m_qprogram->setUniformValue("materialSpecular", m_materialSpecular);
+    m_qprogram->setUniformValue("materialAmbient", m_enableAmbient ? m_materialAmbient : QVector3D(0.0, 0.0, 0.0));
+    m_qprogram->setUniformValue("materialDiffuse", m_enableDiffuse ? m_materialDiffuse : QVector3D(0.0, 0.0, 0.0));
+    m_qprogram->setUniformValue("materialSpecular", m_enableSpecular ? m_materialSpecular : QVector3D(0.0, 0.0, 0.0));
 
     glUseProgram(0);
 }
