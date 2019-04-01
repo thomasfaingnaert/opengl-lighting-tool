@@ -43,4 +43,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     vertex.glsl \
-    fragment.glsl
+    fragment.glsl \
+    fragment_phong.glsl \
+    vertex_phong.glsl
