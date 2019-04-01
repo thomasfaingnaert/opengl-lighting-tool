@@ -101,7 +101,7 @@ private:
     bool m_enableRotation = true;
     float m_rotationSpeed = 0.75f;
 
-    constexpr static unsigned int numOfVertices = 24;
+    constexpr static unsigned int numOfVertices = 240;
 };
 
 #endif // SCENEWIDGET_H
