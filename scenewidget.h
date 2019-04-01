@@ -56,6 +56,10 @@ public slots:
     void setCameraTheta(int f) { m_cameraTheta = f / 180.0f * M_PI; recalcMvpMatrix(); }
     void setCameraPhi(int f) { m_cameraPhi = f / 180.0f * M_PI; recalcMvpMatrix(); }
 
+    void setEnableRotation(bool b) { m_enableRotation = b; }
+    void setRotationSpeed(int speed) { m_rotationSpeed = speed / 100.0f; }
+    void resetRotation() { m_angle = 0.0f; }
+
 private:
     void initProgram();
     void initData();
@@ -71,7 +75,6 @@ private:
 
     int m_width;
     int m_height;
-    float m_angle = 0.0f;
 
     QMatrix4x4 m_mvMatrix;
     QMatrix4x4 m_pMatrix;
@@ -93,6 +96,10 @@ private:
     float m_cameraRadius = 3.0f;
     float m_cameraTheta = 45.0f; // degrees
     float m_cameraPhi = 45.0f; // degrees
+
+    float m_angle = 0.0f;
+    bool m_enableRotation = true;
+    float m_rotationSpeed = 0.75f;
 
     constexpr static unsigned int numOfVertices = 24;
 };

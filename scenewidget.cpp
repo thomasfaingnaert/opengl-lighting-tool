@@ -270,8 +270,12 @@ void SceneWidget::paintGL()
     glBindVertexArray(0);
     glUseProgram(0);
 
-    m_angle = m_angle + 0.75f;
-    while (m_angle > 360.0f) m_angle -= 360.0f;
+
+    if (m_enableRotation)
+    {
+        m_angle = m_angle + m_rotationSpeed;
+        while (m_angle > 360.0f) m_angle -= 360.0f;
+    }
 
     recalcMvpMatrix();
 
